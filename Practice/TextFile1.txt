@@ -1,0 +1,20 @@
+﻿
+Version 1.0
+
+Bulls and cows is a game where the player guesses 4 digits.
+If the digit is in the correct spot, its a bull
+If the digit is in the wrong spot but its a correct number, its a cow
+No repeat numbers
+
+Example:
+Guess - 1234  Answer - 1593
+1 bulls, 1 cows
+
+Guess - 1234  Answer - 4153
+0 bulls, 2 cows
+
+
+Structure:
+
+The program will be run as a user defined object, with a player inputing the guess by using the member function of the class. 
+The number for now will be a pre defined one but in future games i will have it randomised after each correct guess so the game can be played in definetly
