@@ -1,5 +1,12 @@
 ﻿
-Version 1.0
+Version 2.0
+
+Whats new:
+*Game works, it is still in a basic and rough form. No user input on the screen yet, no randomisation as each number must be input when the object is created
+*
+*There is a static instance which counts the amount of user defined objects has been created. this updates every time an object constructor is called. 
+
+
 
 Bulls and cows is a game where the player guesses 4 digits.
 If the digit is in the correct spot, its a bull
