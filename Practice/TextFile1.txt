@@ -1,10 +1,9 @@
 ﻿
-Version 2.0
+Version 3.0
 
 Whats new:
-*Game works, it is still in a basic and rough form. No user input on the screen yet, no randomisation as each number must be input when the object is created
-*
-*There is a static instance which counts the amount of user defined objects has been created. this updates every time an object constructor is called. 
+*added randomisation to the game. i need to work out some of the bugs so that the guess is stored in an array so the numbers can be compared.
+*When the game does reset, you get a full reset of the numbers stored with no repeat numbers. passes the check each time
 
 
 

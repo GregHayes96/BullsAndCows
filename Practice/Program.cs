@@ -1,32 +1,32 @@
 ﻿
-BullsAndCows game1 = new BullsAndCows (3456);  
-BullsAndCows game2 = new BullsAndCows(2367);
+BullsAndCows game1 = new BullsAndCows ();  
+BullsAndCows game2 = new BullsAndCows();
 
-game1.NewGuess(1357);
-game1.NewGuess(3459);
-game1.NewGuess(3456);
+game1.NewGuess(1234);
+game1.NewGuess(5678); 
+game1.NewGuess(9012);
+game1.NewGuess(8632);
+
 
 Console.WriteLine(BullsAndCows.GameTot);
 
 class BullsAndCows
-{
-    int Value;      //field  -  Data Member 
+{      //field  -  Data Member 
     public static int GameTot;
     readonly int[] ValArr = new int[4];
     readonly int[] GuessArr = new int[4];
     int[] BaC = new int[2] { 0, 0 };     //first value represents bulls, second cows 
 
-    public BullsAndCows(int num)        //constructor
+    public BullsAndCows()        //constructor
     {
-        Value = num;
-        SetValArr(num);
+        ResetGame();
         GameTot += 1;
     }
 
     public void SetVal(int num)     //method  -  Function Member
     {
-        Value = num;
-        SetValArr(num);
+       
+        SetValArr();
     }
 
     public void NewGuess(int num)
@@ -35,18 +35,18 @@ class BullsAndCows
         if(Compare() == true) //game won
         {
             Console.WriteLine("Congratulations, game won!");
+            ResetGame();
         }
         else
         {
             Console.WriteLine($"Wrong guess - Bulls:{BaC[0]}    Cows:{BaC[1]}");
         }
-        ResetGame();
     }
 
     //issue, i require an elegant way of checking the index position of a bull an eliminating that from the list of numbers to be checked for cows  -   line 42
     public bool Compare()
     {
-        bool[] index = new bool[4] {false,false,false,false};   //if a bull exists in the index position, bool changes to true
+        bool[] index = {false,false,false,false};   //if a bull exists in the index position, bool changes to true
         //check for bulls, 4 bulls will return true, which is a win
         for(int i = 0; i < 4; i++)
         {
@@ -76,13 +76,43 @@ class BullsAndCows
 
     public void ResetGame()
     {
+        //reset the bulls and cows score
         BaC[0] = 0;
         BaC[1] = 0;
+
+        Random r1 = new Random();   //randomise the 4 digit number
+        ValArr[0] = r1.Next(10);    //first number doesnt need a check if it is a repeat
+        
+        for (int i = 1; i < 4; i++)     //this is going to check the new random number against the previous two, creates a new random if its a repeat
+        {
+            bool pass = false;
+            while(pass == false)
+            {
+                int temp = r1.Next(10);
+                if (NotRepeat(temp,i)) 
+                { 
+                    ValArr[i] = temp;
+                    pass = true;
+                }
+                
+            }   
+        }
     }
 
-    public void SetValArr(int num)
+    public bool NotRepeat(int n,int l)
     {
-        string temp = num.ToString();
+        for(int i = 0; i < l; i++)
+        {
+            if (ValArr[i] == n) { return false; }   //the number is already in ValArr
+        }
+        return true;
+    }
+
+    //i think this is a function that can be cut. would be simpler to just change the way the guess is stored instead
+    public void SetValArr()
+    {
+        string temp = "";
+        for(int i = 0; i < 4; i++) { temp += ValArr[i].ToString(); }
         for (int i = 0; i < temp.Length; i++)
         {
             ValArr[i] = temp[i];
